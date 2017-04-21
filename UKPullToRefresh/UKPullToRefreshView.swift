@@ -99,8 +99,10 @@ open class UKPullToRefreshView: UIView {
         activityIndicatorView.startAnimating()
 
         addSubview(activityIndicatorView)
-        activityIndicatorView.centerHorizontallyToSuperview()
-        activityIndicatorView.centerVerticallyToSuperview()
+
+        let horizontalConstraint = NSLayoutConstraint(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        let verticalConstraint = NSLayoutConstraint(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
+        addConstraints([horizontalConstraint, verticalConstraint])
     }
     
     required public init?(coder aDecoder: NSCoder) {
