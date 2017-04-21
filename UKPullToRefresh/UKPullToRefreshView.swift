@@ -30,7 +30,7 @@ open class UKPullToRefreshView: UIView {
     }
 
     /// Static height for the item
-    var refreshViewHeight: CGFloat = 60.0
+    public var refreshViewHeight: CGFloat = 60.0
 
     /// Position of the item
     var position: Position = .top
@@ -65,7 +65,7 @@ open class UKPullToRefreshView: UIView {
     fileprivate var scrollViewInitialInset: (CGFloat, CGFloat)!
 
     /// Current state of the view
-    var state: State = .stopped {
+    public var state: State = .stopped {
         didSet {
             if oldValue == state {
                 return
