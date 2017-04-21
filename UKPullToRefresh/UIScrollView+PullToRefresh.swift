@@ -19,11 +19,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-var PullToRefreshHandle: UInt8 = 0
+public var PullToRefreshHandle: UInt8 = 0
 
 extension UIScrollView {
 
-    var pullToRefreshView: UKPullToRefreshView! {
+    public var pullToRefreshView: UKPullToRefreshView! {
         get {
             return objc_getAssociatedObject(self, &PullToRefreshHandle) as? UKPullToRefreshView
         }
@@ -34,12 +34,12 @@ extension UIScrollView {
         }
     }
 
-    func setPullToRefreshViewHidden(_ hidden: Bool) {
+    public func setPullToRefreshViewHidden(_ hidden: Bool) {
         pullToRefreshView?.isHidden = hidden
         pullToRefreshView.scrollView = hidden ? nil : self
     }
 
-    func addPullToRefresh(to position: UKPullToRefreshView.Position, handler: @escaping () -> (Void)) {
+    public func addPullToRefresh(to position: UKPullToRefreshView.Position, handler: @escaping () -> (Void)) {
         let view = UKPullToRefreshView()
         self.addSubview(view)
         view.actionHandler = handler

@@ -21,11 +21,11 @@
 
 open class UKPullToRefreshView: UIView {
 
-    enum Position {
+    public enum Position {
         case top, bottom
     }
 
-    enum State: Int {
+    public enum State: Int {
         case stopped, triggered, loading
     }
 
