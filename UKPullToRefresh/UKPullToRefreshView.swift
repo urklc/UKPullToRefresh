@@ -64,6 +64,9 @@ open class UKPullToRefreshView: UIView {
 
     fileprivate var scrollViewInitialInset: (CGFloat, CGFloat)!
 
+    /// If the refresh view is observing scroll view or not
+    fileprivate var isObserving: Bool = false
+
     /// Current state of the view
     public var state: State = .stopped {
         didSet {
@@ -150,15 +153,23 @@ extension UKPullToRefreshView {
     }
 
     func beginObserving(_ scrollView: UIScrollView) {
-        scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: nil)
-        scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: nil)
-        scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.frame), options: .new, context: nil)
+        if !isObserving {
+            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: nil)
+            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: nil)
+            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.frame), options: .new, context: nil)
+
+            isObserving = true
+        }
     }
 
     func endObserving(_ scrollView: UIScrollView) {
-        scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
-        scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
-        scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.frame))
+        if isObserving {
+            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
+            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
+            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.frame))
+
+            isObserving = false
+        }
     }
 
     func scrollViewDidScroll(to contentOffset: CGPoint) {
