@@ -96,20 +96,10 @@ open class UKPullToRefreshView: UIView {
 
     // MARK - Functions
 
-    init() {
+    required public init() {
         super.init(frame: CGRect.zero)
 
         self.autoresizingMask = .flexibleWidth
-
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicatorView.startAnimating()
-
-        addSubview(activityIndicatorView)
-
-        let horizontalConstraint = NSLayoutConstraint(item: activityIndicatorView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0.0)
-        let verticalConstraint = NSLayoutConstraint(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0.0)
-        addConstraints([horizontalConstraint, verticalConstraint])
     }
     
     required public init?(coder aDecoder: NSCoder) {

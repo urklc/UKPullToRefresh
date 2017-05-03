@@ -49,4 +49,16 @@ extension UIScrollView {
 
         setPullToRefreshViewHidden(false)
     }
+
+    public func addPullToRefresh(to position: UKPullToRefreshView.Position, type: UKPullToRefreshView.Type, handler: @escaping () -> (Void)) {
+
+        let view = type.init()
+        self.addSubview(view)
+        view.actionHandler = handler
+        view.position = position
+
+        pullToRefreshView = view
+
+        setPullToRefreshViewHidden(false)
+    }
 }

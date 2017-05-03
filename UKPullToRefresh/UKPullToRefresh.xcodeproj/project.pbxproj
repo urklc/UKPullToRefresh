@@ -10,6 +10,7 @@
 		2B7096411EAA7D42001C5B15 /* UKPullToRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B70963F1EAA7D42001C5B15 /* UKPullToRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2B7096491EAA7D85001C5B15 /* UIScrollView+PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7096471EAA7D85001C5B15 /* UIScrollView+PullToRefresh.swift */; };
 		2B70964A1EAA7D85001C5B15 /* UKPullToRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7096481EAA7D85001C5B15 /* UKPullToRefreshView.swift */; };
+		2B732AFD1EBA2DD400545AF3 /* SimpleActivityIndicatorRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B732AFC1EBA2DD400545AF3 /* SimpleActivityIndicatorRefreshView.swift */; };
 		2B77371A1EACD42400859898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7737191EACD42400859898 /* AppDelegate.swift */; };
 		2B77371C1EACD42400859898 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B77371B1EACD42400859898 /* MasterViewController.swift */; };
 		2B77371E1EACD42400859898 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B77371D1EACD42400859898 /* DetailViewController.swift */; };
@@ -35,6 +36,7 @@
 		2B7096401EAA7D42001C5B15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B7096471EAA7D85001C5B15 /* UIScrollView+PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+PullToRefresh.swift"; sourceTree = SOURCE_ROOT; };
 		2B7096481EAA7D85001C5B15 /* UKPullToRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UKPullToRefreshView.swift; sourceTree = SOURCE_ROOT; };
+		2B732AFC1EBA2DD400545AF3 /* SimpleActivityIndicatorRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleActivityIndicatorRefreshView.swift; sourceTree = "<group>"; };
 		2B7737171EACD42400859898 /* UKPullToRefreshExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UKPullToRefreshExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B7737191EACD42400859898 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B77371B1EACD42400859898 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -93,9 +95,18 @@
 			path = UKPullToRefresh;
 			sourceTree = "<group>";
 		};
+		2B732AFB1EBA2DC400545AF3 /* Simple Activity Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				2B732AFC1EBA2DD400545AF3 /* SimpleActivityIndicatorRefreshView.swift */,
+			);
+			path = "Simple Activity Indicator";
+			sourceTree = "<group>";
+		};
 		2B7737181EACD42400859898 /* UKPullToRefreshExample */ = {
 			isa = PBXGroup;
 			children = (
+				2B732AFB1EBA2DC400545AF3 /* Simple Activity Indicator */,
 				2B7737191EACD42400859898 /* AppDelegate.swift */,
 				2B77371B1EACD42400859898 /* MasterViewController.swift */,
 				2B77371D1EACD42400859898 /* DetailViewController.swift */,
@@ -232,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B77371E1EACD42400859898 /* DetailViewController.swift in Sources */,
+				2B732AFD1EBA2DD400545AF3 /* SimpleActivityIndicatorRefreshView.swift in Sources */,
 				2B77371C1EACD42400859898 /* MasterViewController.swift in Sources */,
 				2B77371A1EACD42400859898 /* AppDelegate.swift in Sources */,
 			);
@@ -461,6 +473,7 @@
 				2B7737291EACD42400859898 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

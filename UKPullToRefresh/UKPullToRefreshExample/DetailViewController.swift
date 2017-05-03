@@ -23,26 +23,29 @@ class DetailViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
         tableView.tableFooterView = UIView()
-        tableView.addPullToRefresh(to: .bottom) { [unowned self] () -> (Void) in
-            self.items.append(contentsOf: self.appendedItems)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+        tableView.addPullToRefresh(
+            to: .bottom,
+            type: example.viewType) { [unowned self] () -> (Void) in
+                self.items.append(contentsOf: self.appendedItems)
 
-                func appendedIndexPaths() -> [IndexPath] {
-                    let itemCount = self.items.count
-                    var indexPaths: [IndexPath] = []
-                    for i in itemCount - self.appendedItems.count...itemCount - 1 {
-                        indexPaths.append(IndexPath(row: i, section: 0))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+
+                    func appendedIndexPaths() -> [IndexPath] {
+                        let itemCount = self.items.count
+                        var indexPaths: [IndexPath] = []
+                        for i in itemCount - self.appendedItems.count...itemCount - 1 {
+                            indexPaths.append(IndexPath(row: i, section: 0))
+                        }
+                        return indexPaths
                     }
-                    return indexPaths
-                }
 
-                self.tableView.insertRows(at: appendedIndexPaths(), with: .automatic)
+                    self.tableView.insertRows(at: appendedIndexPaths(), with: .automatic)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.tableView.pullToRefreshView.state = .stopped
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.tableView.pullToRefreshView.state = .stopped
+                    }
                 }
-            }
         }
     }
 }

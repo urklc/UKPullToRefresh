@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UKPullToRefresh
 
 enum UKPullToRefreshExample: Int {
     case simple
@@ -15,6 +16,13 @@ enum UKPullToRefreshExample: Int {
         switch self {
         case .simple:
             return "Simple Activity Indicator"
+        }
+    }
+
+    var viewType: UKPullToRefreshView.Type {
+        switch self {
+        default:
+            return SimpleActivityIndicatorRefreshView.self
         }
     }
 }
