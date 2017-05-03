@@ -38,7 +38,7 @@ open class UKPullToRefreshView: UIView {
     /// Action block to run when view is pulled
     var actionHandler: (() -> Void)?
 
-    weak var scrollView: UIScrollView! {
+    weak var scrollView: UIScrollView? {
         didSet {
             if let scrollView = scrollView {
                 beginObserving(scrollView)
@@ -54,6 +54,10 @@ open class UKPullToRefreshView: UIView {
     /// Initial values to reset back later
 
     fileprivate var initialOffset: CGPoint {
+        guard let scrollView = scrollView else {
+            return CGPoint.zero
+        }
+
         switch position {
         case .top:
             return CGPoint(x: scrollView.contentOffset.x, y: -scrollViewInitialInset.0)
@@ -113,6 +117,10 @@ open class UKPullToRefreshView: UIView {
     }
 
     fileprivate func refreshFrame() {
+        guard let scrollView = scrollView else {
+            return
+        }
+
         let yPosition = position == .top ? -refreshViewHeight : max(scrollView.contentSize.height, scrollView.bounds.size.height)
         frame = CGRect(x: 0, y: yPosition, width: scrollView.bounds.size.width, height: refreshViewHeight)
 
@@ -152,27 +160,31 @@ extension UKPullToRefreshView {
         }
     }
 
-    func beginObserving(_ scrollView: UIScrollView) {
+    func beginObserving(_ scrollView: UIScrollView?) {
         if !isObserving {
-            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: nil)
-            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: nil)
-            scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.frame), options: .new, context: nil)
+            scrollView?.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset), options: .new, context: nil)
+            scrollView?.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: nil)
+            scrollView?.addObserver(self, forKeyPath: #keyPath(UIScrollView.frame), options: .new, context: nil)
 
             isObserving = true
         }
     }
 
-    func endObserving(_ scrollView: UIScrollView) {
+    func endObserving(_ scrollView: UIScrollView?) {
         if isObserving {
-            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
-            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
-            scrollView.removeObserver(self, forKeyPath: #keyPath(UIScrollView.frame))
+            scrollView?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentOffset))
+            scrollView?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize))
+            scrollView?.removeObserver(self, forKeyPath: #keyPath(UIScrollView.frame))
 
             isObserving = false
         }
     }
 
     func scrollViewDidScroll(to contentOffset: CGPoint) {
+        guard let scrollView = scrollView else {
+            return
+        }
+
         if state != .loading {
             var scrollOffsetThreshold: CGFloat = 0.0
             switch position {
@@ -192,7 +204,7 @@ extension UKPullToRefreshView {
                 if (shouldStop) {
                     state = .stopped
                 }
-            } else if self.scrollView.isDragging {
+            } else if scrollView.isDragging {
                 let shouldTrigger = (contentOffset.y < scrollOffsetThreshold && position == .top) ||
                     (contentOffset.y > scrollOffsetThreshold && position == .bottom)
                 if shouldTrigger {
@@ -227,6 +239,10 @@ extension UKPullToRefreshView {
 extension UKPullToRefreshView {
 
     func resetScrollViewContentInset() {
+        guard let scrollView = scrollView else {
+            return
+        }
+
         var currentInset = scrollView.contentInset
         currentInset.top = CGFloat(scrollViewInitialInset.0)
         if position == .bottom {
@@ -236,6 +252,10 @@ extension UKPullToRefreshView {
     }
 
     func prepareScrollViewContentInsetForLoading() {
+        guard let scrollView = scrollView else {
+            return
+        }
+
         var currentInset = scrollView.contentInset
         let initialInset = position == .top ? scrollViewInitialInset.0 : scrollViewInitialInset.1
 
