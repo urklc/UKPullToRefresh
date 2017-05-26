@@ -35,6 +35,9 @@ open class UKPullToRefreshView: UIView {
     /// Position of the item
     var position: Position = .top
 
+    /// Initial inset not to break original display
+    var scrollViewInitialInset: (CGFloat, CGFloat) = (0.0, 0.0)
+
     /// Action block to run when view is pulled
     var actionHandler: (() -> Void)?
 
@@ -43,7 +46,6 @@ open class UKPullToRefreshView: UIView {
             if let scrollView = scrollView {
                 beginObserving(scrollView)
 
-                scrollViewInitialInset = (scrollView.contentInset.top, scrollView.contentInset.bottom)
                 refreshFrame()
             } else {
                 endObserving(oldValue)
@@ -65,8 +67,6 @@ open class UKPullToRefreshView: UIView {
             return CGPoint(x: scrollView.contentOffset.x, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollViewInitialInset.1)
         }
     }
-
-    fileprivate var scrollViewInitialInset: (CGFloat, CGFloat)!
 
     /// If the refresh view is observing scroll view or not
     fileprivate var isObserving: Bool = false

@@ -56,6 +56,7 @@ extension UIScrollView {
         self.addSubview(view)
         view.actionHandler = handler
         view.position = position
+        view.scrollViewInitialInset = (contentInset.top, contentInset.bottom)
 
         pullToRefreshView = view
 
